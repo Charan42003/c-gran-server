@@ -6,7 +6,7 @@ import sys
 import os
 
 app = Flask(__name__)
-dbUrl = os.environ.get('MONGODB_URL', 'mongodb+srv://charanrajs4122003:iVMlfzZ7oUfHZ5Pu@cluster0.uduculj.mongodb.net/')
+dbUrl = os.environ.get('MONGODB_URL', 'mongodb+srv://charanrajs4122003:51qN7VNdn3p8Gaup@cluster0.uduculj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
 
 
 try:
