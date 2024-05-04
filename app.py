@@ -6,14 +6,14 @@ import sys
 import os
 
 app = Flask(__name__)
-dbUrl = os.environ.get('MONGODB_URL', 'mongodb+srv://charanrajs4122003:51qN7VNdn3p8Gaup@cluster0.uduculj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
+dbUrl = os.environ.get('MONGODB_URL')
 
 
 try:
     client = MongoClient(dbUrl)
-    print("Connected to DB")
+    # print("Connected to DB")
 except errors.ConfigurationError:
-  print("An Invalid URI host error was received. Is your Atlas host name correct in your connection string?")
+#   print("An Invalid URI host error was received. Is your Atlas host name correct in your connection string?")
   sys.exit(1)
 db = client['cgran-bookings']
 Bookings = db['bookings']
@@ -36,7 +36,7 @@ def postBooking():
     people = body['people']
     time = body['time']
     date = body['date']
-    print(fullName, email, phoneNo, people, time, date)
+    # print(fullName, email, phoneNo, people, time, date)
     data = {
         "FullName":fullName,
         "Email":email,
@@ -66,7 +66,7 @@ def postBooking():
 @app.route("/getBookings", methods=["GET"])
 def getBookings():
     allBookings = Bookings.find()
-    print(allBookings)
+    # print(allBookings)
     jsonData = []
     for data in allBookings:
         id = data['_id']
@@ -96,8 +96,8 @@ def getBookings():
 @app.route("/checkout", methods=["DELETE"])
 def checkout():
     id = request.json['_id']
-    deletedbooking = Bookings.delete_one({'_id': ObjectId(id)})
-    print(deletedbooking.deleted_count)
+    Bookings.delete_one({'_id': ObjectId(id)})
+    # print(deletedbooking.deleted_count)
     return jsonify({
         "msg": "Checked out Successfully"
     })
